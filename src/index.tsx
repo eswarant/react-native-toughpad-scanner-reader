@@ -20,3 +20,11 @@ const ToughpadScannerReader = NativeModules.ToughpadScannerReader
 export function multiply(a: number, b: number): Promise<number> {
   return ToughpadScannerReader.multiply(a, b);
 }
+
+export function initializeBarcodeReader() {
+  return ToughpadScannerReader.initializeBarcodeReader();
+}
+
+export function scanBarcode(onReadCallback: (barcodeText: string) => void) {
+  return ToughpadScannerReader.scanBarcode(onReadCallback);
+}
