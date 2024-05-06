@@ -11,7 +11,7 @@ npm install react-native-toughpad-scanner-reader
 ## Usage
 
 ```js
-import { initializeBarcodeReader, scanBarcode } from 'react-native-toughpad-scanner-reader';
+import { initializeBarcodeReader, scanBarcode, hasReader } from 'react-native-toughpad-scanner-reader';
 
 // ...
 

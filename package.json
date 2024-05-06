@@ -1,6 +1,6 @@
 {
   "name": "react-native-toughpad-scanner-reader",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Read barcode using toughpad scanner",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

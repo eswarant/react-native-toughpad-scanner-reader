@@ -51,7 +51,7 @@ public class ToughpadScannerReaderModule extends ReactContextBaseJavaModule impl
   }
 
   @ReactMethod
-  public void initializeBarcodeReader() {
+  public void initializeBarcodeReader(Promise promise) {
     printDebugLog("initializeBarcodeReader");
     if (ToughpadApi.isAlreadyInitialized()) {
       printDebugLog("initializeBarcodeReader Already Initialized");
@@ -63,7 +63,26 @@ public class ToughpadScannerReaderModule extends ReactContextBaseJavaModule impl
       ToughpadApi.initialize(getCurrentActivity(), this);
     } catch (RuntimeException ex) {
         printDebugLog(ex.getMessage());
+        promise.reject("Error in initialize barcode reader", ex);
     }
+  }
+
+  @ReactMethod
+  public boolean hasReader() {
+    if(readers == null || readers.size() == 0){
+      printDebugLog("There is no readers");
+      return false;
+    }
+
+    boolean foundReader = false;
+    for (int i = 0; i < readers.size(); i++) {
+        if (readers.get(i).getBarcodeType() != BarcodeReader.BARCODE_TYPE_CAMERA) {
+           foundReader=true;
+            break;
+        }
+    }
+    printDebugLog("Found readers "+Boolean.toString(foundReader));
+    return foundReader;
   }
 
   @ReactMethod
@@ -74,7 +93,7 @@ public void scanBarcode(Callback readCallBack){
       if (isSelectedReaderDeviceEnabled()) {
         pressSoftwareTrigger();
       }
-      else{
+      else if(hasReader()){
         selectLaserDevice();
         printSelectedReaderDeviceInfo();
         enableSelectedReaderDevice(true);
@@ -115,6 +134,8 @@ public void scanBarcode(Callback readCallBack){
           printDebugLog("onRead Symbology "+strSymbologyId);
           onReadCallback.invoke(strBarcodeData);
   }
+
+
 
   private void releaseBarcodeReader() {
     printDebugLog("releaseBarcodeReader");

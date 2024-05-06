@@ -4,13 +4,45 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {
   initializeBarcodeReader,
   scanBarcode,
+  hasReader,
 } from 'react-native-toughpad-scanner-reader';
+
+type TInbuiltScannerInitResult = {
+  isError: boolean | null;
+  loading: boolean;
+  hasReader: boolean | null;
+};
 
 export default function App() {
   const [barcodeText, setBarcodeText] = React.useState('');
+  const [inbuiltScannerInitResult, setInbuiltScannerInitResult] =
+    React.useState<TInbuiltScannerInitResult>({
+      isError: null,
+      loading: true,
+      hasReader: null,
+    });
+
+  const initBarcodeReader = async () => {
+    try {
+      await initializeBarcodeReader();
+      const reader = hasReader();
+      setInbuiltScannerInitResult({
+        isError: false,
+        loading: false,
+        hasReader: reader,
+      });
+    } catch (ex) {
+      console.error(ex);
+      setInbuiltScannerInitResult({
+        isError: true,
+        loading: false,
+        hasReader: null,
+      });
+    }
+  };
 
   React.useEffect(() => {
-    initializeBarcodeReader();
+    initBarcodeReader();
   }, []);
 
   const onBarcodeReadCallback = (text: string) => {
@@ -23,6 +55,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      {inbuiltScannerInitResult.isError && <Text>{'Error'}</Text>}
+      {inbuiltScannerInitResult.loading && <Text>{'Loading'}</Text>}
       <Text>Barcode: {barcodeText}</Text>
       <View style={styles.button}>
         <TouchableOpacity onPress={onPressScanButton}>

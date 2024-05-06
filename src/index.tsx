@@ -28,3 +28,7 @@ export function initializeBarcodeReader() {
 export function scanBarcode(onReadCallback: (barcodeText: string) => void) {
   return ToughpadScannerReader.scanBarcode(onReadCallback);
 }
+
+export function hasReader(): boolean {
+  return ToughpadScannerReader.hasReader();
+}
