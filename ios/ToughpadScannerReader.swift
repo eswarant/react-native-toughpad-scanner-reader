@@ -6,13 +6,23 @@ class ToughpadScannerReader: NSObject {
     resolve(a*b)
   }
 
-  @objc(initializeBarcodeReader:withB:withResolver:withRejecter:)
-  func initializeBarcodeReader(reject:RCTPromiseRejectBlock) -> Void {
+  @objc(initAPI:withB:withResolver:withRejecter:)
+  func initAPI(reject:RCTPromiseRejectBlock) -> Void {
     reject("Not supported for IOS")
   }
 
-  @objc(scanBarcode:withB:withResolver:withRejecter:)
-  func scanBarcode(reject:RCTPromiseRejectBlock) -> Void {
+  @objc(hasReader:withB:withResolver:withRejecter:)
+  func hasReader(reject:RCTPromiseRejectBlock) -> Void {
+    reject("Not supported for IOS")
+  }
+
+  @objc(activateReader:withB:withResolver:withRejecter:)
+  func activateReader(reject:RCTPromiseRejectBlock) -> Void {
+    reject("Not supported for IOS")
+  }
+
+  @objc(deactivateReader:withB:withResolver:withRejecter:)
+  func deactivateReader(reject:RCTPromiseRejectBlock) -> Void {
     reject("Not supported for IOS")
   }
 }

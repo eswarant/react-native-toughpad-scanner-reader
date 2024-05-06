@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {
-  initializeBarcodeReader,
-  scanBarcode,
-  hasReader,
+  initAPI,
+  activateReader,
+  hasReader
 } from 'react-native-toughpad-scanner-reader';
 
 type TInbuiltScannerInitResult = {
@@ -24,7 +24,7 @@ export default function App() {
 
   const initBarcodeReader = async () => {
     try {
-      await initializeBarcodeReader();
+      await initAPI();
       const reader = hasReader();
       setInbuiltScannerInitResult({
         isError: false,
@@ -50,7 +50,7 @@ export default function App() {
   };
 
   const onPressScanButton = () => {
-    scanBarcode(onBarcodeReadCallback);
+    activateReader(onBarcodeReadCallback);
   };
 
   return (

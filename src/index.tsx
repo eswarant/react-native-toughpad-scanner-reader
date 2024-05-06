@@ -21,14 +21,18 @@ export function multiply(a: number, b: number): Promise<number> {
   return ToughpadScannerReader.multiply(a, b);
 }
 
-export function initializeBarcodeReader() {
-  return ToughpadScannerReader.initializeBarcodeReader();
+export function initAPI() {
+  return ToughpadScannerReader.initAPI();
 }
 
-export function scanBarcode(onReadCallback: (barcodeText: string) => void) {
-  return ToughpadScannerReader.scanBarcode(onReadCallback);
+export function activateReader(onReadCallback: (barcodeText: string) => void) {
+  return ToughpadScannerReader.activateReader(onReadCallback);
 }
 
 export function hasReader(): boolean {
   return ToughpadScannerReader.hasReader();
+}
+
+export function deactivateReader(): void {
+  return ToughpadScannerReader.deactivateReader();
 }
