@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {
   initAPI,
   activateReader,
-  hasReader
+  hasReader,
 } from 'react-native-toughpad-scanner-reader';
 
 type TInbuiltScannerInitResult = {
